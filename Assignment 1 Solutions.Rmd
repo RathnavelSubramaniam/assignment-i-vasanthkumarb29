@@ -1,0 +1,96 @@
+---
+title: "Lab Assignment-1"
+author: "VasanthKumar B"
+date: "2023-07-10"
+output: html_document
+---
+
+
+Assignment 1(Ex.No 9)
+		
+
+
+1.	This exercise involves the Auto data set studied in the lab. Make sure that the missing values have been removed from the data.
+```{r}
+Auto_data=data.frame(Auto)
+
+dim(Auto_data)
+
+View(Auto_data)
+
+Auto_data=na.omit(Auto_data)
+
+```
+
+ (a) Which of the predictors are quantitative, and which are qualitative?
+```{r}
+head(Auto_data)
+
+quantitative <- c("mpg","displacement", "horsepower", "weight", "acceleration", "year")
+
+qualitative <- c("cylinders","origin", "name")
+```
+ 
+(b) What is the range of each quantitative predictor? You can answer this using the range() function.
+```{r}
+quantitative_range <- sapply(Auto[quantitative], range)
+
+
+quantitative_range
+
+```
+
+(c) What is the mean and standard deviation of each quantitative predictor? 
+```{r}
+quantitative_mean <-sapply(Auto_data[quantitative], mean)
+quantitative_mean
+```
+
+```{r}
+standard_deviation <-sapply(Auto_data[quantitative], sd)
+standard_deviation
+```
+
+(d)	 Now remove the 10th through 85th observations. What is the range, mean, and standard deviation of each predictor in the subset of the data that remains? 
+```{r}
+Auto_subset <- Auto_data[-(10:85), ]
+View(Auto_subset)
+
+subset_range <- sapply(Auto_subset[quantitative], range)
+subset_mean <- sapply(Auto_subset[quantitative], mean)
+subset_sd <- sapply(Auto_subset[quantitative], sd)
+```
+
+
+```{r}
+subset_range
+```
+
+
+```{r}
+subset_mean
+```
+
+
+```{r}
+subset_sd
+
+```
+
+(e)	Using the full data set, investigate the predictors graphically, using scatterplots or other tools of your choice. Create some plots highlighting the relationships among the predictors. Comment on your findings.
+```{r}
+pairs(Auto_data[quantitative])
+
+```
+##Mpg and horsepower appears to have an inverse relationship (the higher the mpg, the lower the horsepower). Mpg and acceleration appears to have a slight correlative relationship, but for the most part it appears mpg does not influence acceleration. 
+
+(f) Suppose that we wish to predict gas mileage (mpg) on the basis of the other variables. Do your plots suggest that any of the other variables might be useful in predicting mpg? Justify your answer
+```{r}
+plot(Auto_data$mgp,Auto_data$horsepower)
+
+## Mostly horsepower is affecting mpg(gas mileage) because if the horse power decreases , the mpg is increasing , so this two has negative relationship 
+
+```
+
+
+
